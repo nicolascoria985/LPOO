@@ -10,7 +10,7 @@ void setup() {
     float x = map(i, 0, cant - 1, 50, width - 50);
     float y = height / 2;
     
-    // Velocidades aleatorias
+
     float vx = random(-4, 4);
     float vy = random(-4, 4);
     
