@@ -13,8 +13,12 @@ class cuadrado {
     pos.x += velocidadX;
   }
 
-  void mostrar() {
-    fill(0, 200, 0);
-    rect(pos.x, pos.y, w, h);
-  }
+ void mostrar() {
+  // Cambiamos a CORNER para que coincida con la esquina del rectángulo de colisión
+  imageMode(CORNER); 
+  
+  // Dibujamos la imagen usando el ancho (w) y alto (h) reales del tubo
+  image(imgTubo, pos.x, pos.y, w, h); 
+}
+
 }
