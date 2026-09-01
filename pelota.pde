@@ -1,7 +1,11 @@
 class Pelota {
   PVector pos;
   PVector vel;
-  float r = 20;
+  float r = 18;
+  
+  // 3. Variable para controlar qué imagen mostrar
+  boolean estaAleteando = false;
+  int temporizadorAleteo = 0;
 
   Pelota(float x, float y) {
     pos = new PVector(x, y);
@@ -13,20 +17,29 @@ class Pelota {
   }
 
   void saltar() {
-    vel.y = -6; 
+    vel.y = -5.5; 
+    estaAleteando = true;          // Activa la segunda imagen al saltar
+    temporizadorAleteo = frameCount; // Guarda el fotograma actual para el temporizador
   }
 
   void mover() {
     pos.add(vel);
     vel.limit(8); 
     
-  
-    if (pos.y > height) pos.y = height;
-    if (pos.y < 0) pos.y = 0;
+    // 4. Si pasaron 10 fotogramas (aprox. 0.15 segundos), vuelve a la imagen normal
+    if (estaAleteando && frameCount - temporizadorAleteo > 10) {
+      estaAleteando = false;
+    }
   }
 
   void mostrar() {
-    fill(255, 255, 0);
-    ellipse(pos.x, pos.y, r * 2, r * 2);
+    imageMode(CENTER);
+    
+    // 5. Condicional para decidir qué imagen dibujar
+    if (estaAleteando) {
+      image(imgPajaro2, pos.x, pos.y, r * 2, r * 2); // Imagen de salto
+    } else {
+      image(imgPajaro, pos.x, pos.y, r * 2, r * 2); // Imagen normal
+    }
   }
 }
